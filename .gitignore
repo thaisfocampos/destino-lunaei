@@ -1,0 +1,16 @@
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Variáveis de ambiente
+.env
+.env.local
+
+# Node
+node_modules/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+venv/
