@@ -159,6 +159,32 @@
 
   @media(max-width:640px){ .price-card{padding:44px 24px} .card{padding:32px 20px} .step{gap:16px} }
 
+  /* URGENCY BANNER */
+  .urgency-banner { background:linear-gradient(135deg,rgba(201,168,76,.12) 0%,rgba(107,77,160,.12) 100%);border-top:1px solid rgba(201,168,76,.2);border-bottom:1px solid rgba(201,168,76,.2);padding:14px 24px;text-align:center;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap; }
+  .urgency-banner p { font-family:var(--font-caps);font-size:11px;letter-spacing:2px;color:var(--gold-light); }
+  .urgency-banner .countdown { display:inline-flex;gap:6px;align-items:center; }
+  .count-block { background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);padding:4px 10px;font-family:var(--font-caps);font-size:16px;font-weight:700;color:var(--gold-light);min-width:36px;text-align:center; }
+  .count-sep { color:var(--gold);font-size:16px;font-weight:700; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease; }
+  .reveal.visible { opacity:1;transform:translateY(0); }
+
+  /* FLOATING CTA */
+  .floating-cta { position:fixed;bottom:24px;right:24px;z-index:100;opacity:0;transform:translateY(20px);transition:opacity .4s,transform .4s;pointer-events:none; }
+  .floating-cta.show { opacity:1;transform:translateY(0);pointer-events:all; }
+  .floating-cta a { display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--ink);font-family:var(--font-caps);font-size:10px;font-weight:700;letter-spacing:2px;text-decoration:none;padding:16px 24px;box-shadow:0 8px 40px rgba(201,168,76,.5);transition:transform .3s; }
+  .floating-cta a:hover { transform:scale(1.04); }
+
+  /* SOCIAL PROOF BAR */
+  .social-proof { padding:28px 24px;text-align:center;border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1);background:rgba(201,168,76,.03); }
+  .social-proof-inner { display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;max-width:800px;margin:0 auto; }
+  .sp-item { display:flex;flex-direction:column;align-items:center;gap:4px; }
+  .sp-num { font-family:var(--font-display);font-size:32px;font-weight:300;color:var(--gold-light); }
+  .sp-label { font-family:var(--font-caps);font-size:9px;letter-spacing:3px;color:rgba(250,246,239,.4);text-transform:uppercase; }
+  .sp-divider { width:1px;height:40px;background:rgba(201,168,76,.2); }
+  @media(max-width:500px){ .sp-divider{display:none} .social-proof-inner{gap:24px} }
+
   /* FAQ */
   .faq-section { padding:100px 24px; background:linear-gradient(180deg,transparent 0%,rgba(42,26,74,.3) 50%,transparent 100%); }
   .faq-inner { max-width:780px; margin:0 auto; }
@@ -195,6 +221,22 @@
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 
+<!-- URGENCY BANNER -->
+<div class="urgency-banner">
+  <p>🌙 &nbsp; Oferta especial expira em</p>
+  <div class="countdown">
+    <div class="count-block" id="cnt-h">23</div><span class="count-sep">:</span>
+    <div class="count-block" id="cnt-m">47</div><span class="count-sep">:</span>
+    <div class="count-block" id="cnt-s">12</div>
+  </div>
+  <p>&nbsp; · &nbsp; De <s style="opacity:.6">R$97</s> por apenas <strong style="color:var(--gold-light)">R$37,90</strong></p>
+</div>
+
+<!-- FLOATING CTA -->
+<div class="floating-cta" id="floatCta">
+  <a href="#comprar">✦ &nbsp; Quero o meu Mapa</a>
+</div>
+
 <!-- HERO -->
 <section class="hero">
   <p class="hero-brand">Destino Lunaei</p>
@@ -209,12 +251,25 @@
   <p class="hero-sub">Destino Lunaei</p>
   <p class="hero-desc">O céu no momento em que você nasceu guarda segredos sobre quem você é, o que te move e para onde você está indo.</p>
   <a href="#comprar" class="btn">Quero o meu Mapa Natal da Vida</a>
-  <p class="hero-note">Acesso imediato por apenas <span>R$47</span> · Entrega em até 72 horas</p>
+  <p class="hero-note">De <s>R$97</s> por apenas <span>R$37,90</span> · Entrega em até 72 horas</p>
   <div class="scroll-hint">
     <p>Descubra</p>
     <div class="scroll-line"></div>
   </div>
 </section>
+
+<!-- SOCIAL PROOF BAR -->
+<div class="social-proof reveal">
+  <div class="social-proof-inner">
+    <div class="sp-item"><span class="sp-num">+2.800</span><span class="sp-label">Mapas entregues</span></div>
+    <div class="sp-divider"></div>
+    <div class="sp-item"><span class="sp-num">98%</span><span class="sp-label">Satisfação total</span></div>
+    <div class="sp-divider"></div>
+    <div class="sp-item"><span class="sp-num">★ 4.9</span><span class="sp-label">Avaliação média</span></div>
+    <div class="sp-divider"></div>
+    <div class="sp-item"><span class="sp-num">72h</span><span class="sp-label">Entrega garantida</span></div>
+  </div>
+</div>
 
 <!-- O QUE É -->
 <section class="what-is">
@@ -328,7 +383,7 @@
   <div class="testimonials-grid">
     <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Fiquei em silêncio por um tempo depois de ler. Parecia que alguém finalmente tinha me visto de verdade. Cada parágrafo fazia sentido de um jeito que nunca esperava.</p><p class="t-name">Mariana S.</p><p class="t-sign">Sol em Câncer · São Paulo</p></div>
     <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Comprei sem muita expectativa e me surpreendi completamente. A análise dos desafios me fez entender comportamentos que eu tinha desde sempre sem conseguir explicar.</p><p class="t-name">Lucas T.</p><p class="t-sign">Sol em Escorpião · Curitiba</p></div>
-    <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Recebi em menos de 20 minutos e já comecei a ler na mesma hora. Não consegui parar. Mandei para minha mãe e ela pediu o dela na mesma hora!</p><p class="t-name">Fernanda R.</p><p class="t-sign">Sol em Peixes · Recife</p></div>
+    <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Recebi o mapa dentro de 3 dias como prometido. Quando abri o PDF fiquei impressionada com o tamanho e o cuidado de cada detalhe. Mandei para minha mãe e ela pediu o dela na mesma hora!</p><p class="t-name">Fernanda R.</p><p class="t-sign">Sol em Peixes · Recife</p></div>
     <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Chorei lendo a parte dos desafios. Era tudo que eu vivia e nunca sabia nomear. Senti que alguém finalmente colocou em palavras o que eu carrego há anos dentro de mim.</p><p class="t-name">Camila F.</p><p class="t-sign">Sol em Virgem · Belo Horizonte</p></div>
     <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Nunca acreditei muito em astrologia mas resolvi tentar. Fiquei impressionada com a precisão. Parecia um retrato fiel de tudo que eu vivo e sinto. Recomendo de olhos fechados.</p><p class="t-name">Juliana M.</p><p class="t-sign">Sol em Capricórnio · Porto Alegre</p></div>
     <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Comprei para mim e de presente para duas amigas. As três ficamos surpresas com o quanto bateu com a realidade de cada uma. É um presente incrível para quem você ama.</p><p class="t-name">Renata K.</p><p class="t-sign">Sol em Libra · Florianópolis</p></div>
@@ -359,8 +414,8 @@
     <div class="price-badge">✦ Mais Escolhido ✦</div>
     <p class="price-product">Destino Lunaei</p>
     <h3 class="price-name">Mapa Natal da Vida</h3>
-    <div class="price-amount"><sup>R$</sup>47</div>
-    <p class="price-once">Pagamento único · Sem assinatura</p>
+    <div class="price-amount"><sup>R$</sup>37<span style="font-size:32px">,90</span></div>
+    <p class="price-once"><s style="opacity:.5">De R$97</s> · Pagamento único · Sem assinatura</p>
     <ul class="price-features">
       <li><span>✦</span><span>PDF completo e personalizado com seu nome</span></li>
       <li><span>✦</span><span>Sol, Lua, Ascendente e todos os planetas</span></li>
@@ -459,4 +514,34 @@
   <p class="footer-brand">DESTINO LUNAEI</p>
   <p class="footer-text">© 2025 Destino Lunaei · Todos os direitos reservados</p>
   <p class="footer-text" style="margin-top:10px;font-size:11px;opacity:0.45;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7">O conteúdo do Mapa Natal da Vida destina-se exclusivamente ao autoconhecimento e reflexão pessoal. Não substitui aconselhamento médico, psicológico ou terapêutico.</p>
-  <p class="footer-text" style="margin-top:8px"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" d
+  <p class="footer-text" style="margin-top:8px"><a href="/cdn-cgi/l/email-protection#74171b1a0015001b34101107001d1a1b18011a15111d5a171b19" style="color:rgba(201,168,76,.5);text-decoration:none;"><span class="__cf_email__" data-cfemail="9af9f5f4eefbeef5dafeffe9eef3f4f5f6eff4fbfff3b4f9f5f7">[email&#160;protected]</span></a></p>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// COUNTDOWN TIMER
+(function(){
+  // Set end time 24h from now or use localStorage to persist
+  let end = localStorage.getItem('lunaei_end');
+  if(!end || Date.now() > parseInt(end)){
+    end = Date.now() + 23*3600*1000 + 47*60*1000 + 12*1000;
+    localStorage.setItem('lunaei_end', end);
+  }
+  function tick(){
+    const diff = Math.max(0, parseInt(end) - Date.now());
+    const h = Math.floor(diff/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    document.getElementById('cnt-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cnt-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cnt-s').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+// SCROLL REVEAL
+const revealEls = document.querySelectorAll('.what-is,.inside,.for-who,.about-section,.testimonials,.how,.pricing,.faq-section,.guarantee-section,.final-cta,.social-proof');
+revealEls.forEach(el => el.classList.add('reveal'));
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, {threshold:0.08});
+document.querySelect
