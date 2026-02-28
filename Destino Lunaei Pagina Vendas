@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Destino Lunaei · Mapa Natal da Vida</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600;700&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0d0a14;
+    --cream: #faf6ef;
+    --gold: #c9a84c;
+    --gold-light: #e8cc7e;
+    --violet: #2a1a4a;
+    --white: #ffffff;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-caps: 'Cinzel', Georgia, serif;
+    --font-body: 'Lato', Arial, sans-serif;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--ink); color: var(--cream); font-family: var(--font-body); font-weight: 300; overflow-x: hidden; }
+
+  /* STARS */
+  .stars { position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background: radial-gradient(ellipse at 20% 10%, rgba(100,60,180,0.18) 0%, transparent 60%),
+    radial-gradient(ellipse at 80% 90%, rgba(60,20,100,0.22) 0%, transparent 55%); }
+  .stars::before { content: ''; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 40%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 8%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 30%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 55%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(2px 2px at 85% 20%, rgba(201,168,76,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 70%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 80%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 90% 75%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 35% 60%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 5% 90%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(2px 2px at 65% 95%, rgba(201,168,76,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 45% 45%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 88% 45%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 30% 85%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 70% 15%, rgba(255,255,255,0.8) 0%, transparent 100%),
+      radial-gradient(1px 1px at 55% 65%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(2px 2px at 20% 50%, rgba(201,168,76,0.3) 0%, transparent 100%);
+    animation: twinkle 5s ease-in-out infinite alternate; }
+  @keyframes twinkle { 0%{opacity:.5} 100%{opacity:1} }
+
+  .orb { position: fixed; border-radius: 50%; pointer-events: none; z-index: 0; filter: blur(80px); animation: orbFloat 12s ease-in-out infinite alternate; }
+  .orb-1 { width:400px;height:400px;background:radial-gradient(circle,rgba(107,77,160,.12) 0%,transparent 70%);top:-100px;left:-100px; }
+  .orb-2 { width:500px;height:500px;background:radial-gradient(circle,rgba(201,168,76,.06) 0%,transparent 70%);bottom:10%;right:-150px;animation-delay:-6s; }
+  @keyframes orbFloat { 0%{transform:translate(0,0) scale(1)} 100%{transform:translate(30px,40px) scale(1.05)} }
+
+  section { position: relative; z-index: 1; }
+
+  /* HELPERS */
+  .eyebrow { font-family:var(--font-caps);font-size:10px;letter-spacing:5px;color:var(--gold);text-transform:uppercase;display:block;margin-bottom:20px; }
+  .sec-title { font-family:var(--font-display);font-size:clamp(36px,5vw,58px);font-weight:300;line-height:1.15;margin-bottom:28px; }
+  .sec-title em { font-style:italic;color:var(--gold-light); }
+  .sec-body { font-family:var(--font-display);font-size:clamp(18px,2vw,22px);font-weight:300;line-height:1.85;color:rgba(250,246,239,.75); }
+  .gold-line { width:60px;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);margin:40px auto; }
+  .btn { display:inline-block;background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 50%,var(--gold) 100%);color:var(--ink);font-family:var(--font-caps);font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;text-decoration:none;padding:20px 52px;cursor:pointer;border:none;box-shadow:0 4px 30px rgba(201,168,76,.35);transition:transform .3s,box-shadow .3s; }
+  .btn:hover { transform:translateY(-2px);box-shadow:0 8px 40px rgba(201,168,76,.5); }
+
+  /* HERO */
+  .hero { min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:80px 24px; }
+  .hero-brand { font-family:var(--font-caps);font-size:11px;letter-spacing:6px;color:var(--gold);text-transform:uppercase;margin-bottom:40px; }
+  .moon-svg { width:88px;height:88px;margin:0 auto 36px;filter:drop-shadow(0 0 20px rgba(201,168,76,.45)); }
+  .hero-title { font-family:var(--font-display);font-size:clamp(54px,9vw,100px);font-weight:300;line-height:1;margin-bottom:10px; }
+  .hero-title em { font-style:italic;color:var(--gold-light); }
+  .hero-sub { font-family:var(--font-caps);font-size:clamp(12px,1.8vw,17px);letter-spacing:8px;color:var(--gold);margin-bottom:44px; }
+  .hero-desc { font-family:var(--font-display);font-size:clamp(18px,2.2vw,23px);font-style:italic;font-weight:300;color:rgba(250,246,239,.72);max-width:540px;line-height:1.7;margin:0 auto 52px; }
+  .hero-note { margin-top:18px;font-size:13px;color:rgba(250,246,239,.42); }
+  .hero-note span { color:var(--gold); }
+  .scroll-hint { margin-top:64px;display:flex;flex-direction:column;align-items:center;gap:8px; }
+  .scroll-hint p { font-family:var(--font-caps);font-size:9px;letter-spacing:4px;color:rgba(201,168,76,.45); }
+  .scroll-line { width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{opacity:.3} 50%{opacity:1} }
+
+  /* WHAT IS */
+  .what-is { padding:120px 24px;max-width:860px;margin:0 auto;text-align:center; }
+
+  /* INSIDE */
+  .inside { padding:80px 24px 120px;max-width:1100px;margin:0 auto; }
+  .inside-header { text-align:center;margin-bottom:64px; }
+  .cards-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2px; }
+  .card { background:rgba(255,255,255,.02);border:1px solid rgba(201,168,76,.12);padding:44px 32px;transition:border-color .4s,background .4s;position:relative; }
+  .card::before { content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(to right,transparent,var(--gold),transparent);opacity:0;transition:opacity .4s; }
+  .card:hover { background:rgba(201,168,76,.04);border-color:rgba(201,168,76,.3); }
+  .card:hover::before { opacity:1; }
+  .card-glyph { font-size:30px;margin-bottom:18px;display:block; }
+  .card-title { font-family:var(--font-caps);font-size:12px;letter-spacing:2px;color:var(--gold);margin-bottom:12px;text-transform:uppercase; }
+  .card-text { font-family:var(--font-display);font-size:18px;line-height:1.7;color:rgba(250,246,239,.68); }
+
+  /* FOR WHO */
+  .for-who { padding:100px 24px;background:linear-gradient(180deg,transparent 0%,rgba(42,26,74,.4) 50%,transparent 100%); }
+  .for-who-inner { max-width:760px;margin:0 auto;text-align:center; }
+  .checks { list-style:none;margin-top:52px;display:flex;flex-direction:column;gap:18px;text-align:left;max-width:540px;margin-left:auto;margin-right:auto; }
+  .checks li { display:flex;gap:16px;font-family:var(--font-display);font-size:20px;line-height:1.5;color:rgba(250,246,239,.82);align-items:flex-start; }
+  .checks li::before { content:'✦';color:var(--gold);font-size:13px;margin-top:5px;flex-shrink:0; }
+
+  /* ABOUT */
+  .about-section { padding:100px 24px;background:linear-gradient(180deg,transparent 0%,rgba(42,26,74,.3) 50%,transparent 100%); }
+  .about-inner { max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 360px;gap:80px;align-items:center; }
+  .about-body { font-family:var(--font-display);font-size:clamp(18px,1.8vw,21px);line-height:1.9;color:rgba(250,246,239,.75);margin-bottom:22px; }
+  .about-sig-label { font-family:var(--font-display);font-size:22px;font-style:italic;color:var(--gold-light); }
+  .about-sig-name { font-family:var(--font-caps);font-size:16px;letter-spacing:3px;color:var(--gold);margin-top:8px; }
+  .about-chart-wrap { border:1px solid rgba(201,168,76,.2);padding:28px;background:rgba(255,255,255,.015);text-align:center; }
+  .chart-label { font-family:var(--font-caps);font-size:9px;letter-spacing:3px;color:rgba(201,168,76,.45);margin-top:14px;text-transform:uppercase; }
+  @media(max-width:860px){ .about-inner{grid-template-columns:1fr} .about-chart-wrap{max-width:280px;margin:0 auto} }
+
+  /* TESTIMONIALS */
+  .testimonials { padding:100px 24px;max-width:1060px;margin:0 auto; }
+  .testimonials-header { text-align:center;margin-bottom:60px; }
+  .testimonials-grid { display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px; }
+  .testimonial { border:1px solid rgba(201,168,76,.14);padding:36px 30px;background:rgba(255,255,255,.015);position:relative; }
+  .testimonial::before { content:'"';font-family:var(--font-display);font-size:80px;color:var(--gold);opacity:.18;position:absolute;top:8px;left:22px;line-height:1; }
+  .stars-row { color:var(--gold);font-size:13px;letter-spacing:2px;margin-bottom:10px; }
+  .t-text { font-family:var(--font-display);font-size:18px;font-style:italic;line-height:1.7;color:rgba(250,246,239,.78);margin-bottom:22px;padding-top:18px; }
+  .t-name { font-family:var(--font-caps);font-size:11px;letter-spacing:3px;color:var(--gold);text-transform:uppercase; }
+  .t-sign { font-size:11px;color:rgba(250,246,239,.38);letter-spacing:1px;margin-top:4px; }
+
+  /* HOW */
+  .how { padding:100px 24px;background:linear-gradient(180deg,transparent 0%,rgba(42,26,74,.3) 50%,transparent 100%); }
+  .how-inner { max-width:680px;margin:0 auto; }
+  .how-header { text-align:center;margin-bottom:60px; }
+  .step { display:flex;gap:28px;padding:32px 0;border-bottom:1px solid rgba(201,168,76,.08); }
+  .step:last-child { border-bottom:none; }
+  .step-num { font-family:var(--font-display);font-size:48px;font-weight:300;color:rgba(201,168,76,.22);line-height:1;flex-shrink:0;width:54px; }
+  .step-title { font-family:var(--font-caps);font-size:12px;letter-spacing:2px;color:var(--gold);margin-bottom:8px;text-transform:uppercase; }
+  .step-desc { font-family:var(--font-display);font-size:19px;line-height:1.65;color:rgba(250,246,239,.68); }
+
+  /* PRICING */
+  .pricing { padding:100px 24px 120px;text-align:center; }
+  .price-card { max-width:460px;margin:52px auto 0;border:1px solid rgba(201,168,76,.28);padding:60px 44px;background:rgba(42,26,74,.28);position:relative;backdrop-filter:blur(8px); }
+  .price-badge { position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--ink);font-family:var(--font-caps);font-size:9px;font-weight:700;letter-spacing:3px;padding:6px 20px;white-space:nowrap; }
+  .price-product { font-family:var(--font-display);font-size:13px;letter-spacing:4px;color:var(--gold);font-style:italic;margin-bottom:12px; }
+  .price-name { font-family:var(--font-display);font-size:40px;font-weight:300;margin-bottom:6px; }
+  .price-amount { font-family:var(--font-caps);font-size:58px;font-weight:700;color:var(--gold-light);margin:22px 0 6px;line-height:1; }
+  .price-amount sup { font-size:22px;vertical-align:super; }
+  .price-once { font-family:var(--font-display);font-size:15px;font-style:italic;color:rgba(250,246,239,.42);margin-bottom:34px; }
+  .price-features { list-style:none;margin-bottom:40px;display:flex;flex-direction:column;gap:12px;text-align:left; }
+  .price-features li { display:flex;gap:12px;font-family:var(--font-display);font-size:18px;color:rgba(250,246,239,.8); }
+  .price-features li span:first-child { color:var(--gold);flex-shrink:0; }
+  .guarantee { margin-top:28px;font-family:var(--font-display);font-size:14px;font-style:italic;color:rgba(250,246,239,.38);display:flex;align-items:center;justify-content:center;gap:6px; }
+
+  /* FINAL */
+  .final-cta { padding:120px 24px;text-align:center;position:relative; }
+  .final-cta::before { content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(107,77,160,.14) 0%,transparent 70%);pointer-events:none; }
+
+  /* FOOTER */
+  footer { border-top:1px solid rgba(201,168,76,.1);padding:40px 24px;text-align:center; }
+  .footer-brand { font-family:var(--font-caps);font-size:15px;letter-spacing:5px;color:var(--gold);margin-bottom:12px; }
+  .footer-text { font-size:12px;color:rgba(250,246,239,.25);letter-spacing:1px; }
+
+  @media(max-width:640px){ .price-card{padding:44px 24px} .card{padding:32px 20px} .step{gap:16px} }
+
+  /* URGENCY BANNER */
+  .urgency-banner { background:linear-gradient(135deg,rgba(201,168,76,.12) 0%,rgba(107,77,160,.12) 100%);border-top:1px solid rgba(201,168,76,.2);border-bottom:1px solid rgba(201,168,76,.2);padding:14px 24px;text-align:center;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap; }
+  .urgency-banner p { font-family:var(--font-caps);font-size:11px;letter-spacing:2px;color:var(--gold-light); }
+  .urgency-banner .countdown { display:inline-flex;gap:6px;align-items:center; }
+  .count-block { background:rgba(201,168,76,.15);border:1px solid rgba(201,168,76,.3);padding:4px 10px;font-family:var(--font-caps);font-size:16px;font-weight:700;color:var(--gold-light);min-width:36px;text-align:center; }
+  .count-sep { color:var(--gold);font-size:16px;font-weight:700; }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease; }
+  .reveal.visible { opacity:1;transform:translateY(0); }
+
+  /* FLOATING CTA */
+  .floating-cta { position:fixed;bottom:24px;right:24px;z-index:100;opacity:0;transform:translateY(20px);transition:opacity .4s,transform .4s;pointer-events:none; }
+  .floating-cta.show { opacity:1;transform:translateY(0);pointer-events:all; }
+  .floating-cta a { display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--ink);font-family:var(--font-caps);font-size:10px;font-weight:700;letter-spacing:2px;text-decoration:none;padding:16px 24px;box-shadow:0 8px 40px rgba(201,168,76,.5);transition:transform .3s; }
+  .floating-cta a:hover { transform:scale(1.04); }
+
+  /* SOCIAL PROOF BAR */
+  .social-proof { padding:28px 24px;text-align:center;border-top:1px solid rgba(201,168,76,.1);border-bottom:1px solid rgba(201,168,76,.1);background:rgba(201,168,76,.03); }
+  .social-proof-inner { display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;max-width:800px;margin:0 auto; }
+  .sp-item { display:flex;flex-direction:column;align-items:center;gap:4px; }
+  .sp-num { font-family:var(--font-display);font-size:32px;font-weight:300;color:var(--gold-light); }
+  .sp-label { font-family:var(--font-caps);font-size:9px;letter-spacing:3px;color:rgba(250,246,239,.4);text-transform:uppercase; }
+  .sp-divider { width:1px;height:40px;background:rgba(201,168,76,.2); }
+  @media(max-width:500px){ .sp-divider{display:none} .social-proof-inner{gap:24px} }
+
+  /* FAQ */
+  .faq-section { padding:100px 24px; background:linear-gradient(180deg,transparent 0%,rgba(42,26,74,.3) 50%,transparent 100%); }
+  .faq-inner { max-width:780px; margin:0 auto; }
+  .faq-header { text-align:center; margin-bottom:64px; }
+  .faq-list { display:flex; flex-direction:column; gap:2px; }
+  .faq-item { padding:28px 32px; border:1px solid var(--border); background:rgba(255,255,255,.02); position:relative; transition:border-color .3s,background .3s; }
+  .faq-item::before { content:''; position:absolute; top:0; left:0; right:0; height:1px; background:linear-gradient(to right,transparent,var(--gold),transparent); opacity:0; transition:opacity .3s; }
+  .faq-item:hover { background:rgba(201,168,76,.04); border-color:rgba(201,168,76,.25); }
+  .faq-item:hover::before { opacity:1; }
+  .faq-q { font-family:var(--font-caps); font-size:11px; letter-spacing:1.5px; color:var(--gold); text-transform:uppercase; margin-bottom:12px; }
+  .faq-a { font-family:var(--font-display); font-size:18px; line-height:1.75; color:rgba(250,246,239,.68); }
+
+  /* GARANTIA */
+  .guarantee-section { padding:100px 24px; text-align:center; }
+  .guarantee-inner { max-width:600px; margin:0 auto; border:1px solid rgba(201,168,76,.28); padding:64px 52px; background:rgba(42,26,74,.28); position:relative; }
+  .guarantee-inner::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; background:linear-gradient(to right,transparent,var(--gold),var(--gold-light),var(--gold),transparent); }
+  .guarantee-icon { font-size:44px; margin-bottom:24px; display:block; }
+  .guarantee-body { font-family:var(--font-display); font-size:19px; line-height:1.85; color:rgba(250,246,239,.72); margin:28px 0 36px; }
+  .guarantee-badges { display:flex; gap:16px; justify-content:center; flex-wrap:wrap; }
+  .gbadge { font-family:var(--font-caps); font-size:10px; letter-spacing:2px; color:var(--gold); border:1px solid rgba(201,168,76,.25); padding:10px 20px; text-transform:uppercase; }
+
+  /* AVISO LEGAL */
+  .disclaimer-section { padding:48px 24px 60px; }
+  .disclaimer-inner { max-width:700px; margin:0 auto; text-align:center; border:1px solid rgba(255,255,255,.06); padding:40px 44px; background:rgba(255,255,255,.015); }
+  .disclaimer-icon { font-size:24px; display:block; margin-bottom:12px; opacity:.6; }
+  .disclaimer-title { font-family:var(--font-caps); font-size:11px; letter-spacing:3px; color:rgba(250,246,239,.4); text-transform:uppercase; margin-bottom:16px; }
+  .disclaimer-text { font-family:var(--font-display); font-size:15px; line-height:1.8; color:rgba(250,246,239,.35); }
+  .disclaimer-text strong { color:rgba(250,246,239,.5); font-weight:400; }
+</style>
+</head>
+<body>
+
+<div class="stars"></div>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+
+<!-- URGENCY BANNER -->
+<div class="urgency-banner">
+  <p>🌙 &nbsp; Oferta especial expira em</p>
+  <div class="countdown">
+    <div class="count-block" id="cnt-h">23</div><span class="count-sep">:</span>
+    <div class="count-block" id="cnt-m">47</div><span class="count-sep">:</span>
+    <div class="count-block" id="cnt-s">12</div>
+  </div>
+  <p>&nbsp; · &nbsp; De <s style="opacity:.6">R$97</s> por apenas <strong style="color:var(--gold-light)">R$37,90</strong></p>
+</div>
+
+<!-- FLOATING CTA -->
+<div class="floating-cta" id="floatCta">
+  <a href="#comprar">✦ &nbsp; Quero o meu Mapa</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-brand">Destino Lunaei</p>
+  <svg class="moon-svg" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="46" stroke="#c9a84c" stroke-width="0.5" stroke-dasharray="3 4" opacity="0.4"/>
+    <path d="M50 18 C35 18 24 30 24 50 C24 70 35 82 50 82 C42 72 38 62 38 50 C38 38 42 28 50 18Z" fill="#c9a84c" opacity="0.9"/>
+    <circle cx="68" cy="30" r="1.5" fill="#e8cc7e" opacity="0.8"/>
+    <circle cx="75" cy="50" r="1" fill="#e8cc7e" opacity="0.6"/>
+    <circle cx="65" cy="68" r="2" fill="#c9a84c" opacity="0.7"/>
+  </svg>
+  <h1 class="hero-title">Mapa Natal <em>da Vida</em></h1>
+  <p class="hero-sub">Destino Lunaei</p>
+  <p class="hero-desc">O céu no momento em que você nasceu guarda segredos sobre quem você é, o que te move e para onde você está indo.</p>
+  <a href="#comprar" class="btn">Quero o meu Mapa Natal da Vida</a>
+  <p class="hero-note">De <s>R$97</s> por apenas <span>R$37,90</span> · Entrega em até 72 horas</p>
+  <div class="scroll-hint">
+    <p>Descubra</p>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- SOCIAL PROOF BAR -->
+<div class="social-proof reveal">
+  <div class="social-proof-inner">
+    <div class="sp-item"><span class="sp-num">+2.800</span><span class="sp-label">Mapas entregues</span></div>
+    <div class="sp-divider"></div>
+    <div class="sp-item"><span class="sp-num">98%</span><span class="sp-label">Satisfação total</span></div>
+    <div class="sp-divider"></div>
+    <div class="sp-item"><span class="sp-num">★ 4.9</span><span class="sp-label">Avaliação média</span></div>
+    <div class="sp-divider"></div>
+    <div class="sp-item"><span class="sp-num">72h</span><span class="sp-label">Entrega garantida</span></div>
+  </div>
+</div>
+
+<!-- O QUE É -->
+<section class="what-is">
+  <span class="eyebrow">O que é</span>
+  <h2 class="sec-title">Mais do que astrologia.<br><em>É um espelho da sua alma.</em></h2>
+  <div class="gold-line"></div>
+  <p class="sec-body">O Mapa Natal da Vida é um documento profundo e completamente personalizado, construído a partir da posição exata dos astros no dia, hora e lugar em que você veio ao mundo. Ele revela seus dons escondidos, seus padrões emocionais, seus ciclos de vida e o caminho que faz sentido só para você.</p>
+</section>
+
+<!-- O QUE VOCÊ RECEBE -->
+<section class="inside">
+  <div class="inside-header">
+    <span class="eyebrow">O que você recebe</span>
+    <h2 class="sec-title">Tudo que o céu tem a dizer <em>sobre você</em></h2>
+  </div>
+  <div class="cards-grid">
+    <div class="card"><span class="card-glyph">☀️</span><p class="card-title">Sua Essência Solar</p><p class="card-text">O que você veio ser nesta vida. Seus talentos naturais, sua identidade mais profunda e como você brilha quando está sendo autêntico.</p></div>
+    <div class="card"><span class="card-glyph">🌙</span><p class="card-title">Seu Mundo Interior</p><p class="card-text">A Lua revela seu mundo emocional, suas necessidades ocultas e como você se sente seguro, o que poucas pessoas veem em você.</p></div>
+    <div class="card"><span class="card-glyph">⬆️</span><p class="card-title">Seu Ascendente</p><p class="card-text">Como o mundo te vê na primeira impressão. Sua máscara social, a energia que você projeta e como navega novas situações.</p></div>
+    <div class="card"><span class="card-glyph">💫</span><p class="card-title">Planetas e Casas</p><p class="card-text">Onde cada planeta cai no seu mapa em amor, carreira, família e espiritualidade e o que isso significa para a sua jornada.</p></div>
+    <div class="card"><span class="card-glyph">🔗</span><p class="card-title">Padrões e Desafios</p><p class="card-text">Os ciclos que se repetem na sua vida, por quê acontecem e como transformá-los em pontos de força e crescimento.</p></div>
+    <div class="card"><span class="card-glyph">✉️</span><p class="card-title">Mensagem Pessoal</p><p class="card-text">Cada Mapa Natal da Vida é fechado com uma mensagem escrita para você, acolhedora, reveladora e feita para tocar onde precisa.</p></div>
+  </div>
+</section>
+
+<!-- PARA QUEM É -->
+<section class="for-who">
+  <div class="for-who-inner">
+    <span class="eyebrow">Para quem é</span>
+    <h2 class="sec-title">Para quem sente que<br><em>há mais a descobrir</em></h2>
+    <ul class="checks">
+      <li>Você sente que ainda não encontrou seu verdadeiro caminho</li>
+      <li>Quer entender por que certos padrões se repetem na sua vida</li>
+      <li>Busca autoconhecimento real, além de posts genéricos sobre seu signo</li>
+      <li>Está num momento de transição e quer clareza sobre si mesmo</li>
+      <li>Quer descobrir seus dons e o que te faz único no mundo</li>
+      <li>Ou simplesmente sente curiosidade de se ver a partir de um novo ângulo</li>
+    </ul>
+  </div>
+</section>
+
+<!-- SOBRE A DESTINO LUNAEI -->
+<section class="about-section">
+  <div class="about-inner">
+    <div class="about-text">
+      <span class="eyebrow">Como surgimos</span>
+      <h2 class="sec-title" style="text-align:left">Destino Lunaei nasceu<br><em>de uma busca real.</em></h2>
+      <p class="about-body">Tudo começou com uma pergunta feita em silêncio, numa madrugada de muitas dúvidas: <em>por que, mesmo fazendo tudo certo, ainda me sinto perdida?</em> Foi então que um mapa astral chegou por acaso, e com ele veio algo inesperado: o reconhecimento. Não era magia. Era espelho.</p>
+      <p class="about-body">Aquela experiência transformadora plantou a semente do que viria a ser a <strong style="color:var(--gold-light)">Destino Lunaei</strong>. A ideia era simples e profunda ao mesmo tempo: e se fosse possível entregar essa mesma clareza para outras pessoas? Com rigor, com cuidado e com a linguagem certa?</p>
+      <p class="about-body">O que começou como uma missão pessoal cresceu. Hoje somos uma <strong style="color:var(--gold-light)">equipe técnica de profissionais qualificados</strong>, que une conhecimento astrológico aprofundado, análise simbólica e sensibilidade humana para construir cada Mapa Natal da Vida com a atenção que ele merece.</p>
+      <p class="about-body">Nosso propósito é claro: <em>devolver às pessoas o contato com quem elas realmente são.</em> Não através de respostas prontas, mas de reflexões que abrem portas. Cada mapa que entregamos é único, porque única é a pessoa que o recebe.</p>
+      <p class="about-body">Acreditamos que o autoconhecimento muda vidas. E que todo ser humano merece ter acesso a uma leitura honesta, bonita e verdadeiramente personalizada de si mesmo.</p>
+      <div style="margin-top:36px">
+        <p class="about-sig-label">Com amor e estrelas,</p>
+        <p class="about-sig-name">A equipe · Destino Lunaei</p>
+      </div>
+    </div>
+    <div>
+      <div class="about-chart-wrap">
+        <svg viewBox="0 0 300 300" fill="none" style="width:100%;max-width:280px">
+          <circle cx="150" cy="150" r="140" stroke="#c9a84c" stroke-width="0.8" opacity="0.3"/>
+          <circle cx="150" cy="150" r="100" stroke="#c9a84c" stroke-width="0.5" opacity="0.2"/>
+          <circle cx="150" cy="150" r="55" stroke="#c9a84c" stroke-width="0.8" opacity="0.4"/>
+          <line x1="10" y1="150" x2="290" y2="150" stroke="#c9a84c" stroke-width="0.4" opacity="0.2"/>
+          <line x1="150" y1="10" x2="150" y2="290" stroke="#c9a84c" stroke-width="0.4" opacity="0.2"/>
+          <line x1="51" y1="51" x2="249" y2="249" stroke="#c9a84c" stroke-width="0.3" opacity="0.15"/>
+          <line x1="249" y1="51" x2="51" y2="249" stroke="#c9a84c" stroke-width="0.3" opacity="0.15"/>
+          <line x1="150" y1="10" x2="150" y2="50" stroke="#c9a84c" stroke-width="1.2" opacity="0.5"/>
+          <line x1="290" y1="150" x2="250" y2="150" stroke="#c9a84c" stroke-width="1.2" opacity="0.5"/>
+          <line x1="150" y1="290" x2="150" y2="250" stroke="#c9a84c" stroke-width="1.2" opacity="0.5"/>
+          <line x1="10" y1="150" x2="50" y2="150" stroke="#c9a84c" stroke-width="1.2" opacity="0.5"/>
+          <line x1="220" y1="30" x2="200" y2="64" stroke="#c9a84c" stroke-width="0.6" opacity="0.25"/>
+          <line x1="270" y1="80" x2="240" y2="95" stroke="#c9a84c" stroke-width="0.6" opacity="0.25"/>
+          <line x1="270" y1="220" x2="240" y2="205" stroke="#c9a84c" stroke-width="0.6" opacity="0.25"/>
+          <line x1="220" y1="270" x2="200" y2="236" stroke="#c9a84c" stroke-width="0.6" opacity="0.25"/>
+          <line x1="80" y1="270" x2="100" y2="236" stroke="#c9a84c" stroke-width="0.6" opacity="0.25"/>
+          <line x1="30" y1="220" x2="60" y2="205" stroke="#c9a84c" stroke-width="0.6" opacity="0.25"/>
+          <line x1="30" y1="80" x2="60" y2="95" stroke="#c9a84c" stroke-width="0.6" opacity="0.25"/>
+          <line x1="80" y1="30" x2="100" y2="64" stroke="#c9a84c" stroke-width="0.6" opacity="0.25"/>
+          <line x1="150" y1="38" x2="255" y2="98" stroke="#c9a84c" stroke-width="0.8" opacity="0.2" stroke-dasharray="3 3"/>
+          <line x1="150" y1="38" x2="195" y2="262" stroke="#6b4da0" stroke-width="0.8" opacity="0.25" stroke-dasharray="2 4"/>
+          <line x1="255" y1="98" x2="42" y2="182" stroke="#c9a84c" stroke-width="0.6" opacity="0.18" stroke-dasharray="4 3"/>
+          <path d="M150 122 C139 122 131 134 131 150 C131 166 139 178 150 178 C143 169 140 160 140 150 C140 140 143 131 150 122Z" fill="#c9a84c" opacity="0.65"/>
+          <circle cx="150" cy="150" r="3" fill="#e8cc7e" opacity="0.4"/>
+          <text x="150" y="22" text-anchor="middle" fill="#c9a84c" font-size="10" opacity="0.55" font-family="serif">♈</text>
+          <text x="220" y="46" text-anchor="middle" fill="#c9a84c" font-size="10" opacity="0.55" font-family="serif">♉</text>
+          <text x="278" y="110" text-anchor="middle" fill="#c9a84c" font-size="10" opacity="0.55" font-family="serif">♊</text>
+          <text x="278" y="196" text-anchor="middle" fill="#c9a84c" font-size="10" opacity="0.55" font-family="serif">♋</text>
+          <text x="220" y="258" text-anchor="middle" fill="#c9a84c" font-size="10" opacity="0.55" font-family="serif">♌</text>
+          <text x="150" y="284" text-anchor="middle" fill="#c9a84c" font-size="10" opacity="0.55" font-family="serif">♍</text>
+          <text x="80" y="258" text-anchor="middle" fill="#c9a84c" font-size="10" opacity="0.55" font-family="serif">♎</text>
+          <text x="22" y="196" text-anchor="middle" fill="#c9a84c" font-size="10" opacity="0.55" font-family="serif">♏</text>
+          <text x="22" y="110" text-anchor="middle" fill="#c9a84c" font-size="10" opacity="0.55" font-family="serif">♐</text>
+          <text x="80" y="46" text-anchor="middle" fill="#c9a84c" font-size="10" opacity="0.55" font-family="serif">♑</text>
+          <circle cx="150" cy="38" r="5" fill="#e8cc7e" opacity="0.6"/>
+          <circle cx="255" cy="98" r="4" fill="rgba(250,246,239,0.5)"/>
+          <circle cx="42" cy="182" r="3.5" fill="#c9a84c" opacity="0.7"/>
+        </svg>
+        <p class="chart-label">Mapa Natal · Destino Lunaei</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEPOIMENTOS -->
+<section class="testimonials">
+  <div class="testimonials-header">
+    <span class="eyebrow">O que dizem</span>
+    <h2 class="sec-title">Palavras de quem<br><em>se reconheceu</em></h2>
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Fiquei em silêncio por um tempo depois de ler. Parecia que alguém finalmente tinha me visto de verdade. Cada parágrafo fazia sentido de um jeito que nunca esperava.</p><p class="t-name">Mariana S.</p><p class="t-sign">Sol em Câncer · São Paulo</p></div>
+    <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Comprei sem muita expectativa e me surpreendi completamente. A análise dos desafios me fez entender comportamentos que eu tinha desde sempre sem conseguir explicar.</p><p class="t-name">Lucas T.</p><p class="t-sign">Sol em Escorpião · Curitiba</p></div>
+    <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Recebi o mapa dentro de 3 dias como prometido. Quando abri o PDF fiquei impressionada com o tamanho e o cuidado de cada detalhe. Mandei para minha mãe e ela pediu o dela na mesma hora!</p><p class="t-name">Fernanda R.</p><p class="t-sign">Sol em Peixes · Recife</p></div>
+    <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Chorei lendo a parte dos desafios. Era tudo que eu vivia e nunca sabia nomear. Senti que alguém finalmente colocou em palavras o que eu carrego há anos dentro de mim.</p><p class="t-name">Camila F.</p><p class="t-sign">Sol em Virgem · Belo Horizonte</p></div>
+    <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Nunca acreditei muito em astrologia mas resolvi tentar. Fiquei impressionada com a precisão. Parecia um retrato fiel de tudo que eu vivo e sinto. Recomendo de olhos fechados.</p><p class="t-name">Juliana M.</p><p class="t-sign">Sol em Capricórnio · Porto Alegre</p></div>
+    <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Comprei para mim e de presente para duas amigas. As três ficamos surpresas com o quanto bateu com a realidade de cada uma. É um presente incrível para quem você ama.</p><p class="t-name">Renata K.</p><p class="t-sign">Sol em Libra · Florianópolis</p></div>
+    <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">Estava num momento muito difícil e o mapa me deu uma perspectiva completamente diferente sobre o que estava vivendo. Me ajudou a ver sentido onde eu só via caos.</p><p class="t-name">Patricia L.</p><p class="t-sign">Sol em Aquário · Rio de Janeiro</p></div>
+    <div class="testimonial"><div class="stars-row">★★★★★</div><p class="t-text">O PDF é lindo, bem escrito e muito profundo. Vale muito mais do que o preço. Já li três vezes e sempre encontro algo novo para refletir. Perfeito para quem busca autoconhecimento.</p><p class="t-name">Beatriz N.</p><p class="t-sign">Sol em Touro · Salvador</p></div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="how">
+  <div class="how-inner">
+    <div class="how-header">
+      <span class="eyebrow">Como funciona</span>
+      <h2 class="sec-title">Simples como<br><em>olhar para o céu</em></h2>
+    </div>
+    <div class="step"><span class="step-num">01</span><div><p class="step-title">Você faz o pedido</p><p class="step-desc">Clique no botão, informe sua data, hora e local de nascimento e finalize o pagamento de forma segura pela Kiwify.</p></div></div>
+    <div class="step"><span class="step-num">02</span><div><p class="step-title">O mapa é preparado</p><p class="step-desc">Em até 72 horas, seu Mapa Natal da Vida é gerado de forma personalizada, com seu nome, seus astros, sua história.</p></div></div>
+    <div class="step"><span class="step-num">03</span><div><p class="step-title">Você recebe no e-mail</p><p class="step-desc">Um PDF de alta qualidade, com design elegante e conteúdo profundo, chega diretamente na sua caixa de entrada.</p></div></div>
+    <div class="step"><span class="step-num">04</span><div><p class="step-title">Você se descobre</p><p class="step-desc">Reserve um momento só seu, um chá, silêncio e permita que o mapa te mostre o que você já carregava dentro de si.</p></div></div>
+  </div>
+</section>
+
+<!-- PREÇO -->
+<section class="pricing" id="comprar">
+  <span class="eyebrow">Investimento</span>
+  <h2 class="sec-title">Um mapa único.<br><em>Para uma vida inteira.</em></h2>
+  <div class="price-card">
+    <div class="price-badge">✦ Mais Escolhido ✦</div>
+    <p class="price-product">Destino Lunaei</p>
+    <h3 class="price-name">Mapa Natal da Vida</h3>
+    <div class="price-amount"><sup>R$</sup>37<span style="font-size:32px">,90</span></div>
+    <p class="price-once"><s style="opacity:.5">De R$97</s> · Pagamento único · Sem assinatura</p>
+    <ul class="price-features">
+      <li><span>✦</span><span>PDF completo e personalizado com seu nome</span></li>
+      <li><span>✦</span><span>Sol, Lua, Ascendente e todos os planetas</span></li>
+      <li><span>✦</span><span>Interpretação dos padrões e desafios de vida</span></li>
+      <li><span>✦</span><span>Mensagem pessoal de encerramento</span></li>
+      <li><span>✦</span><span>Entrega em até 72 horas por e-mail</span></li>
+      <li><span>✦</span><span>Garantia de 7 dias de satisfação total</span></li>
+    </ul>
+    <a href="https://kiwify.com.br/SEU-LINK-AQUI" class="btn" style="display:block;text-align:center">Quero o meu Mapa Natal da Vida</a>
+    <p class="guarantee">🔒 Pagamento 100% seguro via Kiwify</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="faq-inner">
+    <div class="faq-header">
+      <span class="eyebrow">Dúvidas frequentes</span>
+      <h2 class="sec-title">Tudo que você<br><em>precisa saber</em></h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <p class="faq-q">✦ &nbsp; O mapa é realmente feito exclusivamente para mim?</p>
+        <p class="faq-a">Sim, completamente. Cada Mapa Natal da Vida é gerado de forma exclusiva a partir da sua data, hora e local de nascimento. Não existem dois mapas iguais, assim como não existem dois céus iguais. O conteúdo é calculado com base nos seus astros reais e interpretado de forma específica para o seu perfil. Você não receberá um modelo genérico, mas uma leitura construída ao redor de quem você é.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">✦ &nbsp; Quanto tempo leva para receber o meu mapa?</p>
+        <p class="faq-a">Seu Mapa Natal da Vida é entregue em até 72 horas após a confirmação do pagamento. Trabalhamos com rigor e atenção em cada etapa para garantir que o documento que chega até você seja completo, cuidadoso e à altura do que você merece. Assim que ficar pronto, ele chegará diretamente no e-mail informado, em formato PDF de alta qualidade.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">✦ &nbsp; Preciso saber o horário exato do nascimento?</p>
+        <p class="faq-a">O horário de nascimento é importante para calcular o Ascendente e as casas astrológicas com precisão. Recomendamos fortemente que você o forneça. Caso não saiba, ainda é possível gerar o mapa, mas algumas informações ficarão incompletas. Sugerimos verificar a certidão de nascimento ou perguntar a familiares.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">✦ &nbsp; O mapa substitui acompanhamento psicológico ou médico?</p>
+        <p class="faq-a">Não. O Mapa Natal da Vida é uma ferramenta de autoconhecimento e reflexão simbólica. Ele não substitui o trabalho de psicólogos, psiquiatras, médicos ou qualquer outro profissional de saúde. Se você estiver passando por um momento difícil, encorajamos que busque apoio profissional especializado.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">✦ &nbsp; Como é feita a análise do mapa?</p>
+        <p class="faq-a">Nossa equipe utiliza técnicas tradicionais da astrologia ocidental, incluindo o sistema de casas Placidus, para calcular com precisão a posição de todos os planetas no momento e local do seu nascimento. A interpretação segue um processo estruturado e revisado, que integra simbolismo astrológico, conhecimento técnico e uma linguagem cuidadosamente escolhida para que você se sinta visto e não julgado.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">✦ &nbsp; E se eu não me identificar com o conteúdo?</p>
+        <p class="faq-a">Oferecemos garantia de 7 dias. Se dentro desse prazo você sentir que o mapa não correspondeu ao prometido, basta nos contatar e devolvemos o valor integralmente. Confiamos profundamente no que entregamos e queremos que você também confie nessa decisão.</p>
+      </div>
+
+      <div class="faq-item">
+        <p class="faq-q">✦ &nbsp; O pagamento é seguro?</p>
+        <p class="faq-a">Sim. Todo o pagamento é processado pela Kiwify, uma das maiores e mais confiáveis plataformas de produtos digitais do Brasil. Seus dados financeiros são protegidos com criptografia avançada e nunca passam por nós diretamente. Você pode comprar com total tranquilidade.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section class="guarantee-section">
+  <div class="guarantee-inner">
+    <div class="guarantee-icon">🔒</div>
+    <span class="eyebrow" style="text-align:center;display:block;margin-bottom:20px">Compra protegida</span>
+    <h2 class="sec-title" style="text-align:center">Garantia incondicional<br><em>de 7 dias</em></h2>
+    <p class="guarantee-body">Acreditamos tanto no que entregamos que assumimos todo o risco por você. Se em até 7 dias após o recebimento do seu Mapa Natal da Vida você sentir que o conteúdo não valeu o investimento, basta nos enviar um e-mail e realizamos a devolução completa do valor pago. Sem burocracia, sem perguntas, sem complicação. Você não perde nada testando.</p>
+    <div class="guarantee-badges">
+      <div class="gbadge">✦ &nbsp; Devolução integral</div>
+      <div class="gbadge">✦ &nbsp; Sem burocracia</div>
+      <div class="gbadge">✦ &nbsp; 7 dias de prazo</div>
+    </div>
+  </div>
+</section>
+
+<!-- AVISO LEGAL -->
+<section class="disclaimer-section">
+  <div class="disclaimer-inner">
+    <p class="disclaimer-icon">⚠️</p>
+    <h3 class="disclaimer-title">Aviso Importante</h3>
+    <p class="disclaimer-text">O Mapa Natal da Vida é um produto voltado exclusivamente para <strong>autoconhecimento, reflexão e desenvolvimento pessoal</strong>. Seu conteúdo é de natureza simbólica e interpretativa, baseado em tradições astrológicas. Ele <strong>não substitui</strong> consultas, diagnósticos ou tratamentos com psicólogos, psiquiatras, médicos ou qualquer outro profissional de saúde habilitado. Se você estiver enfrentando dificuldades emocionais ou de saúde, recomendamos que busque apoio profissional especializado. A Destino Lunaei não se responsabiliza por decisões tomadas com base exclusiva no conteúdo do mapa.</p>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <span class="eyebrow">Destino Lunaei</span>
+  <h2 class="sec-title">O céu não mente.<br><em>E ele tem muito a te dizer.</em></h2>
+  <p class="sec-body" style="max-width:500px;margin:0 auto 48px">Você chegou até aqui por algum motivo. Talvez já seja hora de se olhar de verdade.</p>
+  <a href="#comprar" class="btn">Quero o meu Mapa Natal da Vida</a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p class="footer-brand">DESTINO LUNAEI</p>
+  <p class="footer-text">© 2025 Destino Lunaei · Todos os direitos reservados</p>
+  <p class="footer-text" style="margin-top:10px;font-size:11px;opacity:0.45;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7">O conteúdo do Mapa Natal da Vida destina-se exclusivamente ao autoconhecimento e reflexão pessoal. Não substitui aconselhamento médico, psicológico ou terapêutico.</p>
+  <p class="footer-text" style="margin-top:8px"><a href="/cdn-cgi/l/email-protection#74171b1a0015001b34101107001d1a1b18011a15111d5a171b19" style="color:rgba(201,168,76,.5);text-decoration:none;"><span class="__cf_email__" data-cfemail="9af9f5f4eefbeef5dafeffe9eef3f4f5f6eff4fbfff3b4f9f5f7">[email&#160;protected]</span></a></p>
+</footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// COUNTDOWN TIMER
+(function(){
+  // Set end time 24h from now or use localStorage to persist
+  let end = localStorage.getItem('lunaei_end');
+  if(!end || Date.now() > parseInt(end)){
+    end = Date.now() + 23*3600*1000 + 47*60*1000 + 12*1000;
+    localStorage.setItem('lunaei_end', end);
+  }
+  function tick(){
+    const diff = Math.max(0, parseInt(end) - Date.now());
+    const h = Math.floor(diff/3600000);
+    const m = Math.floor((diff%3600000)/60000);
+    const s = Math.floor((diff%60000)/1000);
+    document.getElementById('cnt-h').textContent = String(h).padStart(2,'0');
+    document.getElementById('cnt-m').textContent = String(m).padStart(2,'0');
+    document.getElementById('cnt-s').textContent = String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+
+// SCROLL REVEAL
+const revealEls = document.querySelectorAll('.what-is,.inside,.for-who,.about-section,.testimonials,.how,.pricing,.faq-section,.guarantee-section,.final-cta,.social-proof');
+revealEls.forEach(el => el.classList.add('reveal'));
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); observer.unobserve(e.target); }});
+}, {threshold:0.08});
+document.querySelect
